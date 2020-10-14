@@ -1,15 +1,5 @@
 from fastapi import FastAPI, status, HTTPException
-from pydantic import BaseModel
-
-class Object_json(BaseModel):
-    id: int
-    name: str
-
-    def check_cache(self):
-        if self.id is 4:
-            return True
-        else:
-            return False
+from classes import Object_json
 
 app = FastAPI()
 
