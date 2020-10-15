@@ -1,16 +1,18 @@
 from pydantic import BaseModel
+from typing import List
 import json
 import hashlib
+from cache import check_if_in_cache
 
 class Object_json(BaseModel):
     id: int
     name: str
 
     def check_cache(self):
-        if self.id == 4:
-            return True
-        else:
-            return False
+        body = self.get_body_hash()
+        bool_status = check_if_in_cache(body)
+
+        return bool_status
 
     def jsonfy(self):
         json_format = {
