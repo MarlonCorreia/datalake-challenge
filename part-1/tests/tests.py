@@ -3,6 +3,7 @@ sys.path.insert(0, '../src')
 import unittest
 from classes import Object_json
 from cache import fake_redis_insert_cache, fake_redis_check_if_in_cache
+from main import test_post 
 import hashlib
 import json
 
@@ -60,6 +61,29 @@ class Test_redis(unittest.TestCase):
         response = fake_redis_check_if_in_cache(self.hash_cached)
 
         self.assertEqual(response, True)
+
+class Test_api_endpoint(unittest.TestCase):
+
+    def setUp(self):
+        self.cached_json = {'id': 12340, 'name': 'apple is a nice fruit'}
+        self.not_cached_json = {'id': 670-3, 'name': 'i prefer bananas'}
+        self.denied_body = {'detail': 'Same body request'}
+
+        self.object_json = Object_json(self.cached_json)
+        self.hash_json = self.object_json.get_body_hash()
+        fake_redis_insert_cache(self.hash_json)
+
+    def test_post_cached_json(self):
+        response = test_post(self.cached_json)
+
+        self.assertEqual(response[0], 403)
+        self.assertEqual(response[1], self.denied_body)
+        
+    def test_post_not_cached_json(self):
+        response = test_post(self.not_cached_json)
+
+        self.assertEqual(response[0], 200)
+        self.assertEqual(response[1], self.not_cached_json)
 
 
 if __name__ == '__main__':
