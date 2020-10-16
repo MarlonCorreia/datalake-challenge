@@ -1,25 +1,39 @@
-from fastapi import FastAPI, status, HTTPException, Request, Body
-from typing import List, Dict, Any
+from fastapi import FastAPI, status, HTTPException, Request, Body, Header
+from fastapi.testclient import TestClient
+from typing import List, Dict, Any, Optional
 from classes import Object_json
+from cache import fake_redis_check_if_in_cache, fake_redis_insert_cache
+import time
 
 app = FastAPI()
 
-
-#@app.post("/post/")
-#async def create_item(object: List[Object_json]):
-#    main_object = object[0]
-#    return_status = main_object.check_cache()
-#
-#    if return_status is True:
-#        raise HTTPException(status_code=403, detail="Same body request")
-
-#    return main_object
+fake_token = "token_for_testing"
 
 @app.post("/post/")
-async def create_item(request = Body(...)):
+async def create_item(request = Body(...), x_token: Optional[str] = Header(None)):
     object_json = Object_json(request)
+
+    if x_token == fake_token:
+        hash_json = object_json.get_body_hash()
+        if fake_redis_check_if_in_cache(hash_json):
+            raise HTTPException(status_code=403, detail="Same body request")
+        return request
+
 
     if object_json.check_cache():
         raise HTTPException(status_code=403, detail="Same body request")
 
     return request
+
+"""Creating Test mockup for endpoints"""
+
+client = TestClient(app)
+
+def test_post(body_json):
+    response = client.post(
+        "/post/",
+        headers={"X-Token": "token_for_testing"},
+        json=body_json,
+    )
+
+    return response.status_code, response.json()
