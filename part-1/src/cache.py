@@ -24,4 +24,5 @@ def fake_redis_check_if_in_cache(hash_json):
     if fake_redis.exists(hash_json):
         return True
     else:
+        fake_redis_insert_cache(hash_json)
         return False
