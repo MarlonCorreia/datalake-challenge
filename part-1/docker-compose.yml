@@ -4,13 +4,17 @@ services:
     web:
       build: .
       volumes:
-        - .:/src
+        - .:/srcc
+      command: bash -c "cd src/; python main.py"
       ports:
         - "80:80"
+      network_mode: "host"
       depends_on:
         - redis
     redis:
       image: "redis"
+      ports:
+        - "6379"
       volumes:
         - 'redis_data:/data'
 
