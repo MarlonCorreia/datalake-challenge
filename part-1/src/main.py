@@ -1,8 +1,9 @@
 from fastapi import FastAPI, status, HTTPException, Request, Body, Header
 from fastapi.testclient import TestClient
+import uvicorn
 from typing import List, Dict, Any, Optional
+from cache import fake_redis_check_if_in_cache
 from classes import Object_json
-from cache import fake_redis_check_if_in_cache, fake_redis_insert_cache
 import time
 
 app = FastAPI()
@@ -24,6 +25,9 @@ async def create_item(request = Body(...), x_token: Optional[str] = Header(None)
         raise HTTPException(status_code=403, detail="Same body request")
 
     return request
+
+if __name__ == '__main__':
+    uvicorn.run(app, port=8000, host='127.0.0.1')
 
 """Creating Test mockup for endpoints"""
 
