@@ -1,7 +1,7 @@
 import redis
 import fakeredis
 
-redis = redis.Redis('172.17.0.2')
+redis = redis.Redis(host='redis', port=6379)
 
 def insert_cache(hash_json):  
     redis.set(hash_json, hash_json, ex=600)

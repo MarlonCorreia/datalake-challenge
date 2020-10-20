@@ -27,7 +27,7 @@ async def create_item(request = Body(...), x_token: Optional[str] = Header(None)
     return request
 
 if __name__ == '__main__':
-    uvicorn.run(app, port=8000, host='127.0.0.1')
+    uvicorn.run(app, port=80, host='0.0.0.0')
 
 """Creating Test mockup for endpoints"""
 
