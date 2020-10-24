@@ -10,8 +10,8 @@ app = FastAPI()
 
 fake_token = "token_for_testing"
 
-@app.post("/post/")
-async def create_item(request = Body(...), x_token: Optional[str] = Header(None)):
+@app.post("/v1/products")
+async def receive_product(request = Body(...), x_token: Optional[str] = Header(None)):
     object_json = Object_json(request)
 
     if x_token == fake_token:
