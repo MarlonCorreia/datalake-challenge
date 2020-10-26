@@ -65,7 +65,7 @@ To use this service, make sure that both redis and the ruby services are running
 $ python src/main.py src/dump/input-dump
 ```
 
-After the service is finished running, an **output.json** file will be createed at the [/src/dump](/src/dump) folder and the runtime of the script will be displayed in the terminal.
+After the service is finished running, an **output.json** file will be createed at the `/src/dump` folder and the runtime of the script will be displayed in the terminal.
 
 Obs¹: I believe that in Ubuntu, python3.XX is called with **python3** 
 
