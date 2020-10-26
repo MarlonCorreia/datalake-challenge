@@ -35,7 +35,7 @@ O seu objetivo é criar um software que gera o dump agregado no menor tempo poss
 
 ## SetUp 
 
-For this project, you'll need to setupt three thigs. First, start redis in your local machine. You can do it following the Quickstart on redis official page [(doc)](https://redis.io/topics/quickstart): 
+For this project, you'll need to setup three thigs. First, start redis in your local machine. You can do it by following the Quickstart on redis official page [(doc)](https://redis.io/topics/quickstart): 
 
 ```bash
 $ wget http://download.redis.io/redis-stable.tar.gz
@@ -65,7 +65,7 @@ To use this service, make sure that both redis and the ruby services are running
 $ python src/main.py src/dump/input-dump
 ```
 
-After the service is finished running, an **output.json** file will be createed at the `/src/dump` folder and the runtime of the script will be displayed in the terminal.
+After the service is finished running, an **output.json** file will be created at the `/src/dump` folder and the runtime of the script will be displayed in the terminal.
 
 Obs¹: I believe that in Ubuntu, python3.XX is called with **python3** 
 
