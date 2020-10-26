@@ -40,9 +40,10 @@ To run the tests, after the step above, run:
 ```bash
 $ docker run part-1_web bash -c 'cd test/; python -m unittest'
 ```
-## obstacles 
+## Obstacles 
 
 In this section i'll write a bit about the things i notice that are not ideal for a service like this. Basically describing some points I know that i have to improve
 
 --- **Imports in python** - There're two instances in the project that is needed to `cd` inside the specific folder to run it properly. I don't believe this is ideal, and probably a better knowledge about imports would remedy that
---- **Tests in general** - Only my second time coding tests for a project. I still can't adapt my project to be fully tested. And some tests are a bit weird (like the POST request test, there're test code inside the prod code).
+
+-- **Tests in general** - Only my second time coding tests for a project. I still can't adapt my project to be fully tested. And some tests are a bit weird (like the POST request test, there're test code inside the prod code).
