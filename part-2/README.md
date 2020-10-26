@@ -69,5 +69,20 @@ After the service is finished running, an **output.json** file will be createed 
 
 Obs¹: I believe that in Ubuntu, python3.XX is called with **python3** 
 
-Obs²: You chance the argument **src/dump/input-dump** for another json file that have the same struture as the one passed as example.
+Obs²: You can chance the argument `src/dump/input-dump` for another json file that have the same structure as the one passed as example.
 
+## Testing
+
+To run the tests, make sure that **Usage** segment is done, and run:
+
+```bash
+$ cd test/; python -m unittest; cd .. 
+```
+
+## Obstacles
+
+In this section i'll write a bit about the things i notice that are not ideal for a service like this. Basically describing some points I know that i have to improve
+
+--- **Testing** - The second part was a harder for me to structure the project to make it testable. I end up only making tests for some of the functions in the Class file
+
+--- **Performance** - I'm not really happy with the performance of my service. with my tests i get in avarege *80 seconds* to finish the job. Python is known to be slower then some other langagues. But i think there's still room for performance gain. I tried porting the service to use threads, but i could't find a way to do it without having the risk of overrind something in Redis. 
