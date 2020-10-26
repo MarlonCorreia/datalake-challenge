@@ -1,0 +1,3 @@
+jsonstream==0.0.1
+redis==3.5.3
+requests==2.24.0
