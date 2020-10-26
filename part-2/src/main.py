@@ -44,7 +44,7 @@ def product_id_not_cached(id, image):
     return
 
 def write_output_json():
-    with open('output.json', 'w') as output_file:
+    with open('src/dump/output.json', 'w') as output_file:
         for key in Product.get_all_keys_from_cache():
             product = Product(key.decode('utf-8'), Product.get_all_images_from_id(key))
             output_file.write(product.jsonfy())
@@ -57,9 +57,11 @@ def check_args_passes():
         sys.argv[1]
         return True
     except:
-        print("Please, pass a valid json file, example: python main.py input.json")
+        print("Please, pass a json file as argument, example: python main.py input.json")
 
 
 if __name__ == "__main__":
      if check_args_passes():
+        start_time = time.time()
         start()
+        print("--- %s seconds ---" % (time.time() - start_time))
